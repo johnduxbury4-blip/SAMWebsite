@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John Duxbury — Strategic Asset Manager & Non-Executive Director</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:    #0f1117;
+      --paper:  #f7f4ef;
+      --gold:   #b89a5a;
+      --gold-lt:#d4b87a;
+      --slate:  #2a2d3a;
+      --muted:  #7a7d8a;
+      --rule:   rgba(184,154,90,0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(247,244,239,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    .hero-left {
+      background: var(--slate);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 9rem 5rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      top: -20%; left: -10%;
+      width: 60%; height: 60%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(184,154,90,0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-left::after {
+      content: 'JD';
+      position: absolute;
+      bottom: -0.1em; right: -0.05em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.3s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 5.5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: #fff;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+
+    .hero-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 2.2rem 0;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.7s forwards;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      max-width: 360px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.9s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 1.1s forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-lt);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.8);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .hero-right {
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      display: block;
+    }
+
+    .hero-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #ddd8cf 0%, #c8c1b5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-photo-placeholder svg {
+      width: 120px;
+      opacity: 0.2;
+    }
+
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(42,45,58,0.15), transparent);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 7rem 4rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--slate);
+      margin-bottom: 2.5rem;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .divider {
+      width: 50px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--paper);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .about-body p {
+      margin-bottom: 1.4rem;
+      color: #3a3d4a;
+      font-size: 1.02rem;
+    }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      border-left: 1px solid var(--rule);
+      padding-left: 3rem;
+    }
+
+    .stat {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .stat:last-child {
+      border-bottom: none;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── EXPERTISE / SKILLS ── */
+    #skills {
+      background: var(--slate);
+      color: #fff;
+    }
+
+    #skills .section-heading {
+      color: #fff;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 1rem;
+    }
+
+    .skill-card {
+      background: rgba(255,255,255,0.04);
+      padding: 2.5rem;
+      border: 1px solid rgba(184,154,90,0.15);
+      transition: background 0.3s, border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.4s;
+    }
+
+    .skill-card:hover::before { height: 100%; }
+    .skill-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(184,154,90,0.35);
+    }
+
+    .skill-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+    }
+
+    /* ── PORTFOLIO ── */
+    #portfolio {
+      background: #f0ece5;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .portfolio-card {
+      background: #fff;
+      padding: 2.8rem;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+
+    .portfolio-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .portfolio-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--rule);
+      padding: 0.3rem 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .portfolio-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--slate);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .portfolio-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--ink);
+      color: #fff;
+      text-align: center;
+    }
+
+    #contact .section-heading {
+      color: #fff;
+    }
+
+    #contact .divider {
+      margin: 0 auto 2.5rem;
+    }
+
+    .contact-intro {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 520px;
+      margin: 0 auto 3rem;
+    }
+
+    .contact-details {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      text-align: center;
+    }
+
+    .contact-item-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-item-value {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .contact-item-value a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-item-value a:hover { color: var(--gold-lt); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.8rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.8rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 8rem 2.5rem 5rem; }
+      .hero-right { height: 55vw; }
+      section { padding: 5rem 2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-stats { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 2rem; flex-direction: row; flex-wrap: wrap; gap: 1.5rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .skills-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">John Duxbury</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Expertise</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" style="padding:0;">
+    <div class="hero-left">
+      <span class="hero-eyebrow">Strategic Asset Management &amp; Governance</span>
+      <h1 class="hero-name">John<br><em>Duxbury</em></h1>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">Delivering strategic clarity and long-term value across complex asset portfolios and boardrooms.</p>
+      <div class="hero-cta">
+        <a href="#about" class="btn btn-gold">About John</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo-placeholder">
+        <!-- Replace this div with an <img> tag when a photo is available -->
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="30" r="18" fill="#888"/>
+          <ellipse cx="40" cy="70" rx="30" ry="18" fill="#888"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="section-label">About</p>
+          <h2 class="section-heading">A career built on<br><em>strategic rigour</em></h2>
+          <div class="divider"></div>
+          <div class="about-body">
+            <p>John Duxbury is a senior professional with extensive experience in strategic asset management and non-executive leadership. He brings a disciplined, long-term perspective to complex organisational and portfolio challenges.</p>
+            <p>With a track record spanning multiple sectors, John combines deep operational understanding with board-level governance expertise — helping organisations protect value, manage risk, and position for sustainable growth.</p>
+            <p>As a Non-Executive Director, John provides the independent oversight and strategic counsel that high-performing boards require, balancing challenge with constructive support to executive teams.</p>
+          </div>
+        </div>
+        <div class="about-stats reveal">
+          <div class="stat">
+            <div class="stat-number">[X]+</div>
+            <div class="stat-label">Years of Senior Experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">[X]</div>
+            <div class="stat-label">NED &amp; Board Appointments</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">[X]</div>
+            <div class="stat-label">Sectors Served</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS / EXPERTISE -->
+  <section id="skills">
+    <div class="section-inner">
+      <p class="section-label reveal">Areas of Expertise</p>
+      <h2 class="section-heading reveal">Where <em>experience</em><br>meets impact</h2>
+      <div class="skills-grid">
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">📊</div>
+          <div class="skill-title">Strategic Asset Management</div>
+          <p class="skill-desc">Maximising the long-term value of complex asset portfolios through rigorous performance frameworks, lifecycle planning, and investment prioritisation.</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">🏛️</div>
+          <div class="skill-title">Board-Level Governance</div>
+          <p class="skill-desc">Independent, incisive non-executive directorship — bringing structured challenge, audit oversight, and strategic accountability to boards across sectors.</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">⚖️</div>
+          <div class="skill-title">Risk &amp; Assurance</div>
+          <p class="skill-desc">Identifying and mitigating strategic and operational risk, embedding robust assurance frameworks that protect organisational value and stakeholder confidence.</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">🔭</div>
+          <div class="skill-title">Long-Term Value Creation</div>
+          <p class="skill-desc">Translating organisational ambition into deliverable strategy — aligning resource allocation, capability, and governance to sustained performance.</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">🤝</div>
+          <div class="skill-title">Stakeholder Leadership</div>
+          <p class="skill-desc">Building trust with investors, regulators, executive teams, and boards — communicating with clarity and credibility at every level of an organisation.</p>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">🔄</div>
+          <div class="skill-title">Transformation &amp; Change</div>
+          <p class="skill-desc">Guiding organisations through structural, strategic, or operational transformation, ensuring continuity of governance and clarity of direction.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="section-inner">
+      <p class="section-label reveal">Selected Work</p>
+      <h2 class="section-heading reveal">Engagements &amp;<br><em>outcomes</em></h2>
+      <div class="portfolio-grid">
+
+        <div class="portfolio-card reveal">
+          <span class="portfolio-tag">Asset Management</span>
+          <h3 class="portfolio-title">[Portfolio / Programme Title]</h3>
+          <p class="portfolio-desc">A brief description of the engagement, the strategic challenge faced, and the outcome delivered. Replace with a real case study or project summary.</p>
+        </div>
+
+        <div class="portfolio-card reveal">
+          <span class="portfolio-tag">Non-Executive Directorship</span>
+          <h3 class="portfolio-title">[Organisation / Board Name]</h3>
+          <p class="portfolio-desc">A brief description of the NED appointment — sector, governance context, and the value brought through independent challenge and board leadership.</p>
+        </div>
+
+        <div class="portfolio-card reveal">
+          <span class="portfolio-tag">Governance</span>
+          <h3 class="portfolio-title">[Governance / Assurance Project]</h3>
+          <p class="portfolio-desc">A brief description of a risk, audit, or governance-focused engagement and the improvements achieved for the client or organisation.</p>
+        </div>
+
+        <div class="portfolio-card reveal">
+          <span class="portfolio-tag">Strategy</span>
+          <h3 class="portfolio-title">[Strategic Advisory Engagement]</h3>
+          <p class="portfolio-desc">A brief description of a strategy or transformation assignment, including the decision-making context and measurable outcomes delivered.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label reveal">Get in Touch</p>
+      <h2 class="section-heading reveal">Let's start a<br><em>conversation</em></h2>
+      <div class="divider reveal" style="margin: 0 auto 2rem;"></div>
+      <p class="contact-intro reveal">Whether you are seeking an independent NED appointment, strategic asset management counsel, or an initial conversation, John welcomes a direct approach.</p>
+      <a href="mailto:your@email.com" class="btn btn-gold reveal">Send an Enquiry</a>
+      <div class="contact-details reveal">
+        <div class="contact-item">
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-value"><a href="mailto:your@email.com">your@email.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">LinkedIn</div>
+          <div class="contact-item-value"><a href="https://linkedin.com/in/placeholder" target="_blank">linkedin.com/in/johnduxbury</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">Location</div>
+          <div class="contact-item-value">[Location], United Kingdom</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 John Duxbury. All rights reserved.</span>
+    <span>Strategic Asset Management &amp; Non-Executive Director</span>
+  </footer>
+
+  <script>
+    // Scroll-triggered reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
