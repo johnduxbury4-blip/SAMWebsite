@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>John Duxbury — Strategic Asset Manager & Non-Executive Director</title>
+  <title>John Duxbury — Chartered Surveyor, Real Estate Investment & Asset Management, NED</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -18,7 +18,6 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -31,7 +30,7 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -44,7 +43,6 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--rule);
     }
-
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.25rem;
@@ -53,13 +51,7 @@
       color: var(--ink);
       text-decoration: none;
     }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-size: 0.78rem;
       font-weight: 500;
@@ -69,17 +61,14 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--gold); }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      position: relative;
     }
-
     .hero-left {
       background: var(--slate);
       display: flex;
@@ -89,7 +78,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .hero-left::before {
       content: '';
       position: absolute;
@@ -99,7 +87,6 @@
       background: radial-gradient(ellipse, rgba(184,154,90,0.12), transparent 70%);
       pointer-events: none;
     }
-
     .hero-left::after {
       content: 'JD';
       position: absolute;
@@ -112,7 +99,6 @@
       pointer-events: none;
       user-select: none;
     }
-
     .hero-eyebrow {
       font-size: 0.72rem;
       font-weight: 500;
@@ -123,7 +109,6 @@
       opacity: 0;
       animation: fadeUp 0.7s 0.3s forwards;
     }
-
     .hero-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(3.5rem, 5.5vw, 5.5rem);
@@ -133,21 +118,14 @@
       opacity: 0;
       animation: fadeUp 0.7s 0.5s forwards;
     }
-
-    .hero-name em {
-      font-style: italic;
-      color: var(--gold-lt);
-    }
-
+    .hero-name em { font-style: italic; color: var(--gold-lt); }
     .hero-rule {
-      width: 60px;
-      height: 1px;
+      width: 60px; height: 1px;
       background: var(--gold);
       margin: 2.2rem 0;
       opacity: 0;
       animation: fadeUp 0.7s 0.7s forwards;
     }
-
     .hero-tagline {
       font-size: 1.05rem;
       font-weight: 300;
@@ -157,7 +135,6 @@
       opacity: 0;
       animation: fadeUp 0.7s 0.9s forwards;
     }
-
     .hero-cta {
       margin-top: 3rem;
       display: flex;
@@ -165,7 +142,6 @@
       opacity: 0;
       animation: fadeUp 0.7s 1.1s forwards;
     }
-
     .btn {
       display: inline-block;
       padding: 0.85rem 2.2rem;
@@ -176,54 +152,20 @@
       text-decoration: none;
       transition: all 0.25s;
     }
+    .btn-gold { background: var(--gold); color: var(--ink); }
+    .btn-gold:hover { background: var(--gold-lt); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-    .btn-gold {
-      background: var(--gold);
-      color: var(--ink);
-    }
-
-    .btn-gold:hover {
-      background: var(--gold-lt);
-    }
-
-    .btn-outline {
-      border: 1px solid rgba(255,255,255,0.3);
-      color: rgba(255,255,255,0.8);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .hero-right {
-      background: var(--paper);
-      position: relative;
-      overflow: hidden;
-    }
-
+    .hero-right { position: relative; overflow: hidden; }
     .hero-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(20%);
+      object-position: center top;
       display: block;
+      filter: grayscale(15%);
     }
-
-    .hero-photo-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(160deg, #ddd8cf 0%, #c8c1b5 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-photo-placeholder svg {
-      width: 120px;
-      opacity: 0.2;
-    }
-
     .hero-right::after {
       content: '';
       position: absolute;
@@ -231,16 +173,9 @@
       background: linear-gradient(to right, rgba(42,45,58,0.15), transparent);
     }
 
-    /* ── SECTIONS ── */
-    section {
-      padding: 7rem 4rem;
-    }
-
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
+    /* SECTIONS */
+    section { padding: 7rem 4rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label {
       font-size: 0.72rem;
       font-weight: 500;
@@ -249,7 +184,6 @@
       color: var(--gold);
       margin-bottom: 0.8rem;
     }
-
     .section-heading {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2.2rem, 3.5vw, 3.2rem);
@@ -258,37 +192,18 @@
       color: var(--slate);
       margin-bottom: 2.5rem;
     }
+    .section-heading em { font-style: italic; color: var(--gold); }
+    .divider { width: 50px; height: 1px; background: var(--gold); margin-bottom: 2.5rem; }
 
-    .section-heading em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .divider {
-      width: 50px;
-      height: 1px;
-      background: var(--gold);
-      margin-bottom: 2.5rem;
-    }
-
-    /* ── ABOUT ── */
-    #about {
-      background: var(--paper);
-    }
-
+    /* ABOUT */
+    #about { background: var(--paper); }
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6rem;
       align-items: start;
     }
-
-    .about-body p {
-      margin-bottom: 1.4rem;
-      color: #3a3d4a;
-      font-size: 1.02rem;
-    }
-
+    .about-body p { margin-bottom: 1.4rem; color: #3a3d4a; font-size: 1.02rem; }
     .about-stats {
       display: flex;
       flex-direction: column;
@@ -296,16 +211,8 @@
       border-left: 1px solid var(--rule);
       padding-left: 3rem;
     }
-
-    .stat {
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .stat:last-child {
-      border-bottom: none;
-    }
-
+    .stat { padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+    .stat:last-child { border-bottom: none; }
     .stat-number {
       font-family: 'Cormorant Garamond', serif;
       font-size: 3.5rem;
@@ -314,7 +221,6 @@
       line-height: 1;
       margin-bottom: 0.3rem;
     }
-
     .stat-label {
       font-size: 0.85rem;
       font-weight: 500;
@@ -323,23 +229,15 @@
       text-transform: uppercase;
     }
 
-    /* ── EXPERTISE / SKILLS ── */
-    #skills {
-      background: var(--slate);
-      color: #fff;
-    }
-
-    #skills .section-heading {
-      color: #fff;
-    }
-
+    /* SKILLS */
+    #skills { background: var(--slate); color: #fff; }
+    #skills .section-heading { color: #fff; }
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
       margin-top: 1rem;
     }
-
     .skill-card {
       background: rgba(255,255,255,0.04);
       padding: 2.5rem;
@@ -348,28 +246,17 @@
       position: relative;
       overflow: hidden;
     }
-
     .skill-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
-      width: 3px;
-      height: 0;
+      width: 3px; height: 0;
       background: var(--gold);
       transition: height 0.4s;
     }
-
     .skill-card:hover::before { height: 100%; }
-    .skill-card:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(184,154,90,0.35);
-    }
-
-    .skill-icon {
-      font-size: 1.8rem;
-      margin-bottom: 1.2rem;
-    }
-
+    .skill-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(184,154,90,0.35); }
+    .skill-icon { font-size: 1.8rem; margin-bottom: 1.2rem; }
     .skill-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.35rem;
@@ -377,38 +264,23 @@
       color: #fff;
       margin-bottom: 0.8rem;
     }
+    .skill-desc { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.75; }
 
-    .skill-desc {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.75;
-    }
-
-    /* ── PORTFOLIO ── */
-    #portfolio {
-      background: #f0ece5;
-    }
-
+    /* PORTFOLIO */
+    #portfolio { background: #f0ece5; }
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
       margin-top: 1rem;
     }
-
     .portfolio-card {
       background: #fff;
       padding: 2.8rem;
       border-bottom: 3px solid transparent;
       transition: border-color 0.3s, transform 0.3s;
-      cursor: default;
     }
-
-    .portfolio-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-4px);
-    }
-
+    .portfolio-card:hover { border-color: var(--gold); transform: translateY(-4px); }
     .portfolio-tag {
       display: inline-block;
       font-size: 0.7rem;
@@ -420,7 +292,6 @@
       padding: 0.3rem 0.9rem;
       margin-bottom: 1.2rem;
     }
-
     .portfolio-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.5rem;
@@ -429,35 +300,18 @@
       margin-bottom: 0.8rem;
       line-height: 1.3;
     }
+    .portfolio-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
 
-    .portfolio-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    /* ── CONTACT ── */
-    #contact {
-      background: var(--ink);
-      color: #fff;
-      text-align: center;
-    }
-
-    #contact .section-heading {
-      color: #fff;
-    }
-
-    #contact .divider {
-      margin: 0 auto 2.5rem;
-    }
-
+    /* CONTACT */
+    #contact { background: var(--ink); color: #fff; text-align: center; }
+    #contact .section-heading { color: #fff; }
+    #contact .divider { margin: 0 auto 2.5rem; }
     .contact-intro {
       font-size: 1.05rem;
       color: rgba(255,255,255,0.6);
       max-width: 520px;
       margin: 0 auto 3rem;
     }
-
     .contact-details {
       display: flex;
       justify-content: center;
@@ -465,11 +319,6 @@
       margin-top: 3rem;
       flex-wrap: wrap;
     }
-
-    .contact-item {
-      text-align: center;
-    }
-
     .contact-item-label {
       font-size: 0.72rem;
       letter-spacing: 0.2em;
@@ -477,21 +326,11 @@
       color: var(--gold);
       margin-bottom: 0.5rem;
     }
-
-    .contact-item-value {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.75);
-    }
-
-    .contact-item-value a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
+    .contact-item-value { font-size: 1rem; color: rgba(255,255,255,0.75); }
+    .contact-item-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
     .contact-item-value a:hover { color: var(--gold-lt); }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
       background: var(--ink);
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -503,37 +342,31 @@
       font-size: 0.8rem;
     }
 
-    /* ── ANIMATIONS ── */
+    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .reveal {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── RESPONSIVE ── */
+    /* RESPONSIVE */
     @media (max-width: 900px) {
       nav { padding: 1.2rem 2rem; }
       .nav-links { gap: 1.5rem; }
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-left { padding: 8rem 2.5rem 5rem; }
-      .hero-right { height: 55vw; }
+      .hero-right { height: 75vw; }
       section { padding: 5rem 2rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-stats { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 2rem; flex-direction: row; flex-wrap: wrap; gap: 1.5rem; }
+      .about-stats { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 2rem; flex-direction: row; flex-wrap: wrap; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .portfolio-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 600px) {
       .nav-links { display: none; }
       .skills-grid { grid-template-columns: 1fr; }
@@ -557,7 +390,7 @@
   <!-- HERO -->
   <section class="hero" style="padding:0;">
     <div class="hero-left">
-      <span class="hero-eyebrow">Chartered Surveyor · Real Estate · Non-Executive Director</span>
+      <span class="hero-eyebrow">Chartered Surveyor &middot; Real Estate &middot; Non-Executive Director</span>
       <h1 class="hero-name">John<br><em>Duxbury</em></h1>
       <div class="hero-rule"></div>
       <p class="hero-tagline">Over 30 years delivering investment performance and board-level leadership across UK commercial real estate.</p>
@@ -581,9 +414,9 @@
           <div class="divider"></div>
           <div class="about-body">
             <p>John Duxbury MRICS is a Chartered Surveyor with over 30 years of experience as an investment and asset management specialist, working across both investor and occupier perspectives in UK commercial real estate.</p>
-            <p>Most recently serving as Director and Head of UK Portfolio Asset Management at M&G Real Estate — one of Europe's largest real estate investment managers — John led the UK asset management team through significant market cycles, consistently delivering investment performance for clients and shareholders across all major commercial sectors.</p>
+            <p>Most recently serving as Director and Head of UK Portfolio Asset Management at M&amp;G Real Estate — one of Europe's largest real estate investment managers — John led the UK asset management team through significant market cycles, consistently delivering investment performance for clients and shareholders across all major commercial sectors.</p>
             <p>John brings board-level experience as a Non-Executive Director across a broad range of commercial and living real estate funds, and as Company Director on investor Joint Venture Boards and Asset SPVs. He has served as Chair of Asset Management Committees and as a member of Investment Committees, and is an active contributor to the British Property Federation's Asset Management Committee.</p>
-            <p>Having completed a distinguished 27-year career at M&G Real Estate, John is now available for NED appointments, trustee board roles, and real estate advisory mandates across asset management, investment, property management, and development.</p>
+            <p>Having completed a distinguished 27-year career at M&amp;G Real Estate, John is now available for NED appointments, trustee board roles, and real estate advisory mandates across asset management, investment, property management, and development.</p>
           </div>
         </div>
         <div class="about-stats reveal">
@@ -604,7 +437,7 @@
     </div>
   </section>
 
-  <!-- SKILLS / EXPERTISE -->
+  <!-- SKILLS -->
   <section id="skills">
     <div class="section-inner">
       <p class="section-label reveal">Areas of Expertise</p>
@@ -661,7 +494,7 @@
         <div class="portfolio-card reveal">
           <span class="portfolio-tag">Office Development</span>
           <h3 class="portfolio-title">40 Leadenhall, London</h3>
-          <p class="portfolio-desc">A flagship best-in-class office development brought to market by M&G Real Estate, achieving 80% pre-let well in advance of practical completion. Winner of the BCO Award for best Commercial Workplace — recognised as a defining example of the modern London office.</p>
+          <p class="portfolio-desc">A flagship best-in-class office development brought to market by M&amp;G Real Estate, achieving 80% pre-let well in advance of practical completion. Winner of the BCO Award for best Commercial Workplace — recognised as a defining example of the modern London office.</p>
         </div>
 
         <div class="portfolio-card reveal">
@@ -692,20 +525,20 @@
       <p class="section-label reveal">Get in Touch</p>
       <h2 class="section-heading reveal">Let's start a<br><em>conversation</em></h2>
       <div class="divider reveal" style="margin: 0 auto 2rem;"></div>
-      <p class="contact-intro reveal">Having concluded a 27-year career at M&G Real Estate, John is actively exploring NED appointments, trustee board roles, and real estate advisory mandates. He welcomes a direct approach from organisations seeking experienced, independent leadership.</p>
-      <a href="/cdn-cgi/l/email-protection#9ee7f1ebecdefbf3fff7f2b0fdf1f3" class="btn btn-gold reveal">Send an Enquiry</a>
+      <p class="contact-intro reveal">Having concluded a 27-year career at M&amp;G Real Estate, John is actively exploring NED appointments, trustee board roles, and real estate advisory mandates. He welcomes a direct approach from organisations seeking experienced, independent leadership.</p>
+      <a href="mailto:your@email.com" class="btn btn-gold reveal">Send an Enquiry</a>
       <div class="contact-details reveal">
         <div class="contact-item">
           <div class="contact-item-label">Email</div>
-          <div class="contact-item-value"><a href="/cdn-cgi/l/email-protection#d8a1b7adaa98bdb5b9b1b4f6bbb7b5"><span class="__cf_email__" data-cfemail="aed7c1dbdceecbc3cfc7c280cdc1c3">[email&#160;protected]</span></a></div>
+          <div class="contact-item-value"><a href="mailto:your@email.com">your@email.com</a></div>
         </div>
         <div class="contact-item">
           <div class="contact-item-label">LinkedIn</div>
-          <div class="contact-item-value"><a href="https://linkedin.com/in/johnduxbury" target="_blank">linkedin.com/in/johnduxbury</a></div>
+          <div class="contact-item-value"><a href="https://www.linkedin.com/in/johnduxbury/" target="_blank">linkedin.com/in/johnduxbury</a></div>
         </div>
         <div class="contact-item">
           <div class="contact-item-label">Location</div>
-          <div class="contact-item-value">[Location], United Kingdom</div>
+          <div class="contact-item-value">United Kingdom</div>
         </div>
       </div>
     </div>
@@ -713,11 +546,29 @@
 
   <!-- FOOTER -->
   <footer>
-    <span>© 2026 John Duxbury. All rights reserved.</span>
-    <span>Chartered Surveyor MRICS · Real Estate Investment &amp; Asset Management · NED</span>
+    <span>&copy; 2026 John Duxbury. All rights reserved.</span>
+    <span>Chartered Surveyor MRICS &middot; Real Estate Investment &amp; Asset Management &middot; NED</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Scroll-triggered reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
+  <script>
+    // Scroll-triggered reveal with robust fallback
+    var reveals = document.querySelectorAll('.reveal');
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, i) {
+          if (entry.isIntersecting) {
+            setTimeout(function() {
+              entry.target.classList.add('visible');
+            }, i * 80);
+          }
+        });
+      }, { threshold: 0.05 });
+      reveals.forEach(function(el) { observer.observe(el); });
+    } else {
+      reveals.forEach(function(el) { el.classList.add('visible'); });
+    }
+  </script>
+
+</body>
+</html>
