@@ -1,0 +1,9 @@
+# Ignore all subdirectories
+/*/
+
+# Ignore .md files except README.md
+*.md
+!README.md
+
+# Ignore jfif files
+*.jfif

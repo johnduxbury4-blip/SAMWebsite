@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stockbridge Asset Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --slate:   #1a2028;
+      --slate-mid: #242d38;
+      --slate-light: #2e3a47;
+      --gold:    #c9a84c;
+      --gold-light: #e2c67a;
+      --cream:   #f5f0e8;
+      --white:   #ffffff;
+      --text-muted: #8a9ab0;
+      --border:  rgba(201,168,76,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--slate);
+      color: var(--cream);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+    h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); letter-spacing: -0.01em; }
+    h2 { font-size: 1.35rem; }
+    h3 { font-size: 1.15rem; }
+    h4 { font-size: 1rem; font-weight: 500; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    p { font-size: 1rem; line-height: 1.8; color: rgba(245,240,232,0.85); }
+    a { color: inherit; text-decoration: none; }
+
+    .gold { color: var(--gold); }
+    .eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 4vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(26,32,40,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+    }
+    .nav-logo span {
+      display: block;
+      font-size: 0.72rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.7);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.55rem 1.4rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--slate); }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--cream);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--slate);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--cream);
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('city_looking_up.jpeg');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.35);
+      transform: scale(1.04);
+      animation: slowZoom 20s ease-out forwards;
+    }
+    @keyframes slowZoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1.00); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(26,32,40,0.5) 0%,
+        rgba(26,32,40,0.1) 50%,
+        rgba(26,32,40,0.75) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 12vh 4vw 6vh;
+      max-width: 900px;
+    }
+
+    .hero-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6.5vw, 6rem);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.6s forwards;
+    }
+    .hero-tagline em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      margin-top: 1.75rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(245,240,232,0.75);
+      max-width: 560px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.85s forwards;
+    }
+
+    .hero-actions {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s 1.05s forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      background: var(--gold);
+      color: var(--slate);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid rgba(245,240,232,0.4);
+      color: var(--cream);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-scroll {
+      position: relative;
+      z-index: 2;
+      padding: 2rem 4vw;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 1.3s forwards;
+    }
+    .hero-scroll-line {
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-scroll span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION LAYOUT ── */
+    section { padding: 7rem 4vw; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 4rem;
+    }
+    .section-header h2 {
+      color: var(--cream);
+    }
+
+    /* ── ABOUT INTRO ── */
+    #about {
+      background: var(--slate-mid);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-photo-wrap {
+      position: relative;
+    }
+    .about-photo-wrap img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .about-photo-caption {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -1.5rem;
+      background: var(--gold);
+      color: var(--slate);
+      padding: 1.25rem 1.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      max-width: 220px;
+      line-height: 1.5;
+    }
+
+    .about-text h2 { margin-bottom: 1.5rem; }
+    .about-text p { margin-bottom: 1.25rem; }
+
+    .about-credentials {
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .credential {
+      font-family: 'Barlow Condensed', sans-serif;
+    }
+    .credential-value {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1;
+    }
+    .credential-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--slate);
+    }
+
+    .services-intro {
+      max-width: 680px;
+      margin-bottom: 4.5rem;
+    }
+    .services-intro p { font-size: 1.05rem; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--slate-mid);
+      padding: 3rem 2.5rem;
+      border-top: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { background: var(--slate-light); }
+
+    .service-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      color: rgba(201,168,76,0.12);
+      line-height: 1;
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      pointer-events: none;
+    }
+
+    .service-card h3 {
+      margin-bottom: 1rem;
+      color: var(--cream);
+      font-size: 1.15rem;
+    }
+    .service-card p {
+      font-size: 0.92rem;
+      color: rgba(245,240,232,0.7);
+    }
+    .service-link {
+      margin-top: 1.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      transition: gap 0.2s;
+    }
+    .service-link:hover { gap: 0.9rem; }
+    .service-link::after { content: '→'; }
+
+    /* ── TRACK RECORD ── */
+    #track-record {
+      background: var(--slate-mid);
+      padding-bottom: 0;
+    }
+
+    .track-hero {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+    .track-hero-img {
+      width: 100%;
+      height: 55vh;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+      filter: brightness(0.55);
+    }
+    .track-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(26,32,40,0.85) 40%, transparent 100%);
+      display: flex;
+      align-items: center;
+      padding: 0 4vw;
+    }
+    .track-hero-text {
+      max-width: 600px;
+    }
+    .track-hero-text h2 { color: var(--white); margin-bottom: 1rem; }
+    .track-hero-text p { color: rgba(245,240,232,0.8); }
+
+    .track-cases {
+      padding: 5rem 4vw 7rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .track-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .case-card {
+      background: var(--slate);
+      padding: 2.5rem;
+      border-bottom: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .case-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold-light);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .case-card:hover::before { transform: scaleX(1); }
+    .case-card:hover { border-color: var(--gold); background: var(--slate-light); }
+
+    .case-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .case-card h3 {
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .case-card p {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.65);
+    }
+
+    /* Award highlight */
+    .award-strip {
+      background: var(--gold);
+      padding: 1.5rem 4vw;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .award-strip img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .award-strip-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      color: var(--slate);
+    }
+    .award-strip-text strong {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .award-strip-text span {
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── IMAGE GALLERY strip ── */
+    .gallery-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 260px;
+      overflow: hidden;
+    }
+    .gallery-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7) saturate(0.8);
+      transition: filter 0.4s;
+    }
+    .gallery-strip img:hover { filter: brightness(0.9) saturate(1); }
+
+    /* ── HOW WE WORK ── */
+    #how-we-work {
+      background: var(--slate);
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: 0.4fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .how-image {
+      position: relative;
+    }
+    .how-image img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .how-image-accent {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      width: 60%;
+      height: 60%;
+      border: 1px solid var(--border);
+      pointer-events: none;
+    }
+
+    .how-text h2 { margin-bottom: 2rem; }
+    .how-text p { margin-bottom: 1.25rem; }
+
+    .engagement-models {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .engagement-item {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+    }
+    .engagement-item:first-child { border-top: 1px solid var(--border); }
+
+    .engagement-box {
+      background: var(--slate-mid);
+      padding: 2.5rem;
+      border-top: 2px solid var(--gold);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .engagement-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold-light);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .engagement-box:hover::before { transform: scaleX(1); }
+    .engagement-box:hover { background: var(--slate-light); }
+
+    .situation-box {
+      padding: 1.5rem;
+      border-left: 2px solid var(--gold);
+      background: rgba(201,168,76,0.05);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .situation-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold-light);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .situation-box:hover::before { transform: scaleX(1); }
+    .situation-box:hover { background: rgba(201,168,76,0.12); }
+    .engagement-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .engagement-detail strong {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
+    }
+    .engagement-detail p {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.6);
+      margin: 0;
+    }
+
+    /* ── VALUES ── */
+    #values {
+      background: var(--slate-mid);
+      padding: 5rem 4vw;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .value-item {
+      padding: 2rem;
+      border-left: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .value-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold-light);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .value-item:hover::before { transform: scaleX(1); }
+    .value-item:hover { background: var(--slate-light); }
+    .value-item h4 {
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .value-item p {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.65);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--slate);
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; right: 0;
+      width: 45%;
+      background-image: url('JD_headshot.jpeg');
+      background-size: cover;
+      background-position: center top;
+      opacity: 0.18;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+    }
+    .contact-inner h2 {
+      font-size: 1.35rem;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+    .contact-inner p {
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .contact-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      width: 70px;
+      flex-shrink: 0;
+    }
+    .contact-value {
+      font-size: 0.95rem;
+      color: var(--cream);
+    }
+    .contact-value a { transition: color 0.2s; }
+    .contact-value a:hover { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111820;
+      padding: 2.5rem 4vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+    .footer-meta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      text-align: right;
+    }
+    .footer-meta a { color: var(--text-muted); transition: color 0.2s; }
+    .footer-meta a:hover { color: var(--gold); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .about-grid, .how-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo-wrap { max-width: 380px; }
+      .about-photo-caption { bottom: -1rem; left: -0.5rem; }
+      .how-image { display: none; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .track-cases-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-strip { grid-template-columns: repeat(2, 1fr); height: 200px; }
+
+      #contact::before { display: none; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-meta { text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 5rem 5vw; }
+      .values-grid { grid-template-columns: 1fr; }
+      .hero-content { padding: 10vh 5vw 5vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ── -->
+  <nav id="nav">
+    <a href="#home" class="nav-logo">
+      Stockbridge Asset Management
+      <span>Independent Real Estate Advisory</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">What We Do</a></li>
+      <li><a href="#track-record">Track Record</a></li>
+      <li><a href="#how-we-work">How We Work</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mob-link">About</a>
+    <a href="#services" class="mob-link">What We Do</a>
+    <a href="#track-record" class="mob-link">Track Record</a>
+    <a href="#how-we-work" class="mob-link">How We Work</a>
+    <a href="#contact" class="mob-link">Contact</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-rule"></div>
+      <h1 class="hero-tagline">
+        Independent real estate expertise.<br>
+        <em>Personally delivered.</em>
+      </h1>
+      <p class="hero-sub">
+        Thirty years of institutional experience across asset management, investment and development. Outcome-focused, commercially grounded, across all major UK commercial sectors and strategies.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">What We Do</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="about-photo-wrap">
+            <img src="City_Building_elevation.jpeg" alt="City of London — Stockbridge Asset Management" />
+            <div class="about-photo-caption">John Duxbury MRICS<br>Founder &amp; Principal</div>
+          </div>
+          <div class="about-credentials" style="margin-top: 2.5rem;">
+            <div class="credential">
+              <span class="credential-value">30+</span>
+              <span class="credential-label">Years Senior Experience</span>
+            </div>
+            <div class="credential">
+              <span class="credential-value">£8bn+</span>
+              <span class="credential-label">Peak Portfolio AUM</span>
+            </div>
+            <div class="credential">
+              <span class="credential-value">400+</span>
+              <span class="credential-label">Assets Managed</span>
+            </div>
+            <div class="credential">
+              <span class="credential-value">MRICS</span>
+              <span class="credential-label">Chartered Surveyor</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <span class="eyebrow">About the Firm</span>
+          <h2>Senior experience.<br>No institutional layers.</h2>
+          <p>An independent real estate advisory firm providing strategic asset management, investment transaction execution, development management oversight and board-level counsel across UK commercial real estate.</p>
+          <p>At the heart of the firm is John Duxbury MRICS — a Chartered Surveyor with over 30 years of senior experience working across all major commercial sectors on both core and value-add strategies.</p>
+          <p>Across successive Director-level roles at M&amp;G Real Estate — Head of UK Portfolio Asset Management and Head of UK Retail &amp; Leisure — John was responsible for some of the UK's largest and most complex commercial real estate portfolios, at peak spanning more than 400 assets and exceeding £8 billion AUM.</p>
+          <p>Stockbridge Asset Management brings that depth of experience to every mandate. Senior, independent, performance-focused advice — delivered personally, without the layers of institutional process. Every engagement is led directly by John.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">What We Do</span>
+        <h2>Expert counsel across<br>the real estate lifecycle.</h2>
+      </div>
+      <div class="services-intro reveal" style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: stretch; max-width: 100%;">
+        <div>
+          <p>Stockbridge Asset Management provides independent, senior real estate advisory — bringing no agency agenda, no conflicting fund management interest and no institutional overhead. Every engagement is bespoke, defined with the client and delivered directly.</p>
+          <p style="margin-top: 1.25rem;">As an investment lead, asset manager and client representative, John has coordinated and directed investment, asset management, legal, technical and operational teams around a single purpose: 'Performance driven; Client focused; Delivered responsibly'.</p>
+        </div>
+        <img src="Building_development_interior_lobby.jpeg" alt="Development interior lobby" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <span class="service-number">01</span>
+          <span class="eyebrow">Core Service</span>
+          <h3>Strategic Asset Management</h3>
+          <p>Active, commercially driven asset management across all major UK commercial sectors — translating investment objectives into executable business plans, seeking out value at every stage of the asset lifecycle. Experience and track record leading <a href="#complex-situations" style="color:var(--gold-light); text-decoration:underline; text-underline-offset:3px;">complex situations and dispute resolution</a>.</p>
+          <a href="#track-record" class="service-link">See Track Record</a>
+        </div>
+
+        <div class="service-card reveal">
+          <span class="service-number">02</span>
+          <span class="eyebrow">Advisory</span>
+          <h3>Real Estate Advisory</h3>
+          <p>Independent, senior real estate counsel for investors, occupiers, private capital and the public sector — from strategic advice and investment transaction execution through to <a href="#interim-executive" style="color:var(--gold-light); text-decoration:underline; text-underline-offset:3px;">interim executive leadership</a> and <a href="#business-change" style="color:var(--gold-light); text-decoration:underline; text-underline-offset:3px;">business change and transformation</a>.</p>
+          <a href="#contact" class="service-link">Discuss Your Brief</a>
+        </div>
+
+        <div class="service-card reveal">
+          <span class="service-number">03</span>
+          <span class="eyebrow">Development</span>
+          <h3>Development Management</h3>
+          <p>Senior client-side oversight as an experienced and informed client representative, providing strategic direction, stakeholder management and commercial rigour on development and construction projects from inception through to practical completion, leasing and issues resolution.</p>
+          <a href="#contact" class="service-link">Find Out More</a>
+        </div>
+
+        <div class="service-card reveal">
+          <span class="service-number">04</span>
+          <span class="eyebrow">Governance</span>
+          <h3>NED &amp; Board Advisory</h3>
+          <p>Independent board-level advisory and oversight, drawing on over a decade of NED and company directorship appointments across major UK real estate funds and asset SPVs, joint venture boards and investment and governance committees. John served as a former FCA SMCR Approved Person and voting member of Property Investment Committee and Chair of Asset Management Committee.</p>
+          <a href="#contact" class="service-link">Request NED CV</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMPLEX SITUATIONS callout ── -->
+  <div id="complex-situations" style="background: var(--slate-light); padding: 4rem 4vw; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container" style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+      <div class="reveal">
+        <span class="eyebrow">Specialist Capability</span>
+        <h2 style="color:var(--cream); margin-bottom: 1.25rem;">Complex Situations &amp; Dispute Resolution</h2>
+        <p>Some of the most value-destructive moments in a real estate portfolio are not market-driven — they are operational. Technical defects, contractor failures, warranty claims, JV partner disputes, occupier insolvencies and contractual disagreements can consume disproportionate client time over months or years.</p>
+        <p style="margin-top:1rem;">This is where Stockbridge Asset Management offers something distinctive — senior commercial leadership that balances legal, financial and reputational considerations, knowing when to push back hard, when to negotiate, and when a pragmatic settlement serves the client's interests better than prolonged conflict.</p>
+        <p style="margin-top:1rem;">Working closely with the client to establish a clear brief and objectives, John as a senior client representative can take ownership of the situation, define the strategy and lead and direct the client's external professional and legal advisors alongside internal subject experts.</p>
+      </div>
+      <div class="reveal" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div class="situation-box">
+          <p style="font-size: 0.9rem; color: rgba(245,240,232,0.75);">Dispute resolution strategy across high-value technical defect and warranty claim situations at industrial assets — coordinating multi-party negotiations to reach financial settlements through mediation.</p>
+        </div>
+        <div class="situation-box">
+          <p style="font-size: 0.9rem; color: rgba(245,240,232,0.75);">Directed resolution of a major contractor performance dispute on a large mixed-use commercial development — resolved without litigation.</p>
+        </div>
+        <div class="situation-box">
+          <p style="font-size: 0.9rem; color: rgba(245,240,232,0.75);">Managed negotiations across more than 20 occupier administration, CVA and restructuring situations — working alongside industry bodies to mitigate investor losses.</p>
+        </div>
+        <div class="situation-box">
+          <p style="font-size: 0.9rem; color: rgba(245,240,232,0.75);">Directed the response to a JV partner insolvency at two shopping centre destinations — resetting the JV structure to enable step-in by lenders, resulting in successful co-management and business continuity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── INTERIM EXECUTIVE ── -->
+  <div id="interim-executive" style="background: var(--slate-light); padding: 4rem 4vw; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="reveal">
+        <span class="eyebrow">Specialist Capability</span>
+        <h2 style="color:var(--cream); margin-bottom: 1.25rem;">Interim Executive Leadership</h2>
+        <p>When experienced senior real estate leadership is required at short notice — covering a period of transition, a specific project or an unplanned departure — Stockbridge Asset Management is available for interim executive appointments across both private and public sector organisations.</p>
+        <p style="margin-top:1rem;">John brings Director-level experience leading large, multi-disciplinary real estate teams — stepping in quickly, establishing credibility with existing teams and stakeholders, getting to grips with issues and maintaining momentum to minimise delays and risk whilst a permanent or longer-term solution is sourced.</p>
+        <p style="margin-top:1rem;">Assignments may include interim asset management or estates roles, team stabilisation, project leadership, or senior oversight during a formal recruitment process.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BUSINESS CHANGE ── -->
+  <div id="business-change" style="background: var(--slate-light); padding: 4rem 4vw; border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="reveal">
+        <span class="eyebrow">Specialist Capability</span>
+        <h2 style="color:var(--cream); margin-bottom: 1.25rem;">Business Change &amp; Transformation</h2>
+        <p>Restructuring a property function, reviewing an operating model, or selecting and appointing managing agents and asset management operating partners are decisions with long-term financial and operational consequences — and ones that benefit from senior, independent oversight.</p>
+        <p style="margin-top:1rem;">Stockbridge Asset Management works with clients to define the brief, stress-test the process and ensure the right outcome is achieved. Drawing on direct experience of overseeing major platform transformation and operating partner selection programmes, John brings a sharp commercial eye to pitch documents, proposals and recommended solutions — asking the right questions, challenging assumptions and ensuring the client's interests remain front and centre at every stage.</p>
+        <p style="margin-top:1rem;">We are pleased to work alongside our client's legal and specialist advisors and subject experts for larger projects and are able to offer access to a wider network of associates.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TRACK RECORD ── -->
+  <section id="track-record" style="padding: 0; background: var(--slate-mid);">
+
+    <!-- Hero image -->
+    <div class="track-hero">
+      <img class="track-hero-img" src="City_Building_elevation.jpeg" alt="City of London office development" />
+      <div class="track-hero-overlay">
+        <div class="track-hero-text reveal">
+          <span class="eyebrow">Track Record</span>
+          <h2>Delivered at scale.<br>Across every major sector.</h2>
+          <p style="margin-top:1rem;">A career defined by outcomes — complex developments delivered, portfolios repositioned, disputes resolved and value created for clients.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Award strip -->
+    <div class="award-strip">
+      <img src="40_Leadenhall_BCO_Awards.jpeg" alt="BCO Awards 2025" />
+      <div class="award-strip-text">
+        <strong>BCO Regional Award — Best Commercial Workplace 2025</strong>
+        <span>40 Leadenhall, London · Executive board development oversight and strategic direction from delivery through pre-leasing and practical completion</span>
+      </div>
+    </div>
+
+    <!-- Case studies -->
+    <div class="track-cases">
+      <div class="track-cases-grid">
+
+        <div class="case-card reveal">
+          <span class="case-tag">Office Development · City of London</span>
+          <h3>Super-Prime Office Flagship</h3>
+          <p>SPV board oversight and asset management direction on a flagship City of London office development through delivery, pre-leasing and practical completion. Resolved complex construction and contract issues. Originated review of quoting terms to drive valuation performance. BCO Regional Award winner.</p>
+        </div>
+
+        <div class="case-card reveal">
+          <span class="case-tag">Retail · Regional Destinations</span>
+          <h3>Leading Regional Retail Destinations</h3>
+          <p>Senior client representative and JV board member on two of the UK's leading regional retail destinations — directing asset management strategy, business planning and active leasing programmes to deliver a post-pandemic occupancy turnaround. Investment transaction execution to acquire a JV partner interest at one scheme.</p>
+        </div>
+
+        <div class="case-card reveal">
+          <span class="case-tag">Development · Mixed Use</span>
+          <h3>Major Mixed-Use Development</h3>
+          <p>Directed resolution of a major contractor performance dispute — negotiating with multiple parties to address programme, cost and build quality failures. Renegotiated the development structure with public sector stakeholders, enabling appointment of alternative delivery partners. Resolved without litigation.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Gallery strip -->
+    <div class="gallery-strip">
+      <img src="40_Leadenhall_Cinema.jpeg" alt="40 Leadenhall — screening room amenity" />
+      <img src="Building_development_interior_lobby.jpeg" alt="Development interior lobby" />
+      <img src="Building_Development_reception.jpeg" alt="Building reception" style="object-position: center 75%;" />
+      <img src="Development_building_terrace.jpeg" alt="Rooftop terrace" />
+    </div>
+
+  </section>
+
+  <!-- ── HOW WE WORK ── -->
+  <section id="how-we-work">
+    <div class="container">
+      <div class="how-grid">
+        <div class="how-image reveal">
+          <img src="JD_Headshop_Development_ppe.jpeg" alt="John Duxbury on site — hands-on client representation" />
+          <div class="how-image-accent"></div>
+        </div>
+        <div class="how-text">
+          <span class="eyebrow reveal">How We Work</span>
+          <h2 class="reveal">Direct engagement.<br>No delegation.</h2>
+          <p class="reveal">Every Stockbridge Asset Management engagement is led personally by John. There is no team to hand off to, no junior associates managing the relationship, no institutional process diluting the quality of advice. You engage with thirty years of senior experience — directly and throughout.</p>
+          <p class="reveal" style="margin-top: 1.25rem;">Stockbridge Asset Management operates across three engagement models, calibrated to the client's specific situation and requirements.</p>
+        </div>
+      </div>
+      <div class="reveal" style="margin-top: 1.5rem;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
+          <div class="engagement-box">
+            <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); display: block; margin-bottom: 1rem;">I</span>
+            <strong style="display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; color: var(--cream); margin-bottom: 0.75rem;">Advisory Mandate</strong>
+            <p style="font-size: 0.88rem; color: rgba(245,240,232,0.6); margin: 0; line-height: 1.7;">Focused strategic advice on a specific brief — defined scope, clear deliverables, delivered directly.</p>
+          </div>
+          <div class="engagement-box">
+            <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); display: block; margin-bottom: 1rem;">II</span>
+            <strong style="display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; color: var(--cream); margin-bottom: 0.75rem;">Interim Executive Role</strong>
+            <p style="font-size: 0.88rem; color: rgba(245,240,232,0.6); margin: 0; line-height: 1.7;">Director-level leadership on a time-limited basis — covering transitions, specific projects or capacity requirements.</p>
+          </div>
+          <div class="engagement-box">
+            <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); display: block; margin-bottom: 1rem;">III</span>
+            <strong style="display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; color: var(--cream); margin-bottom: 0.75rem;">Non-Executive Directorship</strong>
+            <p style="font-size: 0.88rem; color: rgba(245,240,232,0.6); margin: 0; line-height: 1.7;">Independent board-level oversight and governance, drawing on extensive NED experience across funds, SPVs and joint ventures.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ESG ── -->
+  <div style="background: var(--slate-mid); padding: 5rem 4vw; border-top: 1px solid var(--border);">
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
+      <div class="reveal">
+        <span class="eyebrow">Sustainability &amp; ESG</span>
+        <h2 style="color: var(--cream); margin-bottom: 1.5rem;">Responsible ownership.<br>Embedded — not as an after-thought.</h2>
+        <p>Responsible asset management and strong ESG credentials support asset liquidity and long-term investment performance — and are increasingly expected by investors, occupiers and lenders alike.</p>
+        <p style="margin-top: 1rem;">ESG considerations are embedded in how every mandate is approached — from energy performance, MEES compliance and climate risk assessment through to occupier wellbeing, community impact and governance standards.</p>
+        <p style="margin-top: 1rem;">John has championed ESG initiatives across major institutional portfolios for over 15 years — contributing to GRESB ratings, driving EPC improvement programmes and embedding sustainability targets into asset business plans and supply chain performance frameworks.</p>
+        <p style="margin-top: 1rem;">Stockbridge Asset Management can support clients in meeting their ESG obligations and ambitions — practically, commercially and without losing sight of investment performance.</p>
+        <p style="margin-top: 1.5rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase;">A full Sustainability &amp; ESG Statement is available on request.</p>
+      </div>
+      <div class="reveal">
+        <img src="Building_interior_ESG.jpeg" alt="ESG — building amenity and occupier wellbeing" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VALUES ── -->
+  <section id="values">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Our Values</span>
+        <h2>The principles that underpin<br>every engagement.</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-item reveal">
+          <h4>Integrity</h4>
+          <p>Straightforward advice, honestly delivered. Always in the client's interest.</p>
+        </div>
+        <div class="value-item reveal">
+          <h4>Objectivity</h4>
+          <p>Acting and taking decisions impartially, fairly and on merit, using the best evidence and without discrimination or bias.</p>
+        </div>
+        <div class="value-item reveal">
+          <h4>Tenacity</h4>
+          <p>Complex situations require persistence. We stay with problems until they are resolved.</p>
+        </div>
+        <div class="value-item reveal">
+          <h4>Diligence</h4>
+          <p>The detail matters. Rigorous analysis and careful judgement underpin every recommendation.</p>
+        </div>
+        <div class="value-item reveal">
+          <h4>Commercial Acumen</h4>
+          <p>Solutions that work in the real world — practical, executable and focused on outcomes.</p>
+        </div>
+        <div class="value-item reveal">
+          <h4>Performance</h4>
+          <p>Activity without results is not enough. Every engagement is measured against the outcomes we deliver.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <span class="eyebrow reveal">Get in Touch</span>
+        <h2 class="reveal">Let's talk.</h2>
+        <p class="reveal">Whether you have a specific mandate in mind, are exploring options, or simply want to understand more about what Stockbridge Asset Management offers — John is easy to reach for an initial conversation without obligation.</p>
+        <div class="contact-details reveal">
+          <div class="contact-line">
+            <span class="contact-label">Email</span>
+            <span class="contact-value"><a href="mailto:john.duxbury@stockbridgeassetmanagement.co.uk">john.duxbury@stockbridgeassetmanagement.co.uk</a></span>
+          </div>
+          <div class="contact-line">
+            <span class="contact-label">Mobile</span>
+            <span class="contact-value"><a href="tel:07889922416">07889 922416</a></span>
+          </div>
+          <div class="contact-line">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value"><a href="https://linkedin.com/in/johnduxbury" target="_blank" rel="noopener">linkedin.com/in/johnduxbury</a></span>
+          </div>
+        </div>
+        <a href="mailto:john.duxbury@stockbridgeassetmanagement.co.uk" class="btn-primary reveal">Send a Message</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">
+      Stockbridge Asset Management
+    </div>
+    <div class="footer-meta">
+      <div>John Duxbury MRICS &nbsp;·&nbsp; Chartered Surveyor &nbsp;·&nbsp; Independent Real Estate Advisory</div>
+      <div style="margin-top:0.35rem;">&copy; 2026 Stockbridge Asset Management &nbsp;·&nbsp; <a href="mailto:john.duxbury@stockbridgeassetmanagement.co.uk">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll behaviour
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
