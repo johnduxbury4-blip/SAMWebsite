@@ -833,6 +833,37 @@
     .footer-meta a { color: var(--text-muted); transition: color 0.2s; }
     .footer-meta a:hover { color: var(--gold); }
 
+    /* ── LAYOUT GRID CLASSES (extracted from inline styles for responsive control) ── */
+    .services-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: stretch;
+      max-width: 100%;
+    }
+    .complex-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .engagement-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .esg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .esg-photos {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
     /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
@@ -858,6 +889,24 @@
       .track-cases-grid { grid-template-columns: 1fr; }
       .values-grid { grid-template-columns: 1fr 1fr; }
       .gallery-strip { grid-template-columns: 1fr; height: auto; }
+
+      /* responsive grid overrides */
+      .services-intro-grid { grid-template-columns: 1fr; }
+      .services-intro-grid img { display: none; }
+
+      .complex-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .situation-box {
+        background: none;
+        border-top: none;
+        padding: 0.6rem 0 0.6rem 1.25rem;
+      }
+      .situation-box::before { display: none; }
+
+      .engagement-grid { grid-template-columns: 1fr; }
+
+      .esg-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .esg-photos { flex-direction: row; }
+      .esg-photos img { flex: 1; min-width: 0; }
 
       #contact::before { display: none; }
       footer { flex-direction: column; text-align: center; }
@@ -971,7 +1020,7 @@
         <span class="eyebrow">What We Do</span>
         <h2>Expert counsel across<br>the real estate lifecycle.</h2>
       </div>
-      <div class="services-intro reveal" style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: stretch; max-width: 100%;">
+      <div class="services-intro services-intro-grid reveal">
         <div>
           <p>Stockbridge Asset Management provides independent, senior real estate advisory — bringing no agency agenda, no conflicting fund management interest and no institutional overhead. Every engagement is bespoke, defined with the client and delivered directly.</p>
           <p style="margin-top: 1.25rem;">As an investment lead, asset manager and client representative, John has coordinated and directed investment, asset management, legal, technical and operational teams around a single purpose: 'Performance driven; Client focused; Delivered responsibly'.</p>
@@ -1018,7 +1067,7 @@
 
   <!-- ── COMPLEX SITUATIONS callout ── -->
   <div id="complex-situations" style="background: var(--slate-light); padding: 4rem 4vw; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-    <div class="container" style="display:grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+    <div class="container complex-grid">
       <div class="reveal">
         <span class="eyebrow">Specialist Capability</span>
         <h2 style="color:var(--cream); margin-bottom: 1.25rem;">Complex Situations &amp; Dispute Resolution</h2>
@@ -1142,7 +1191,7 @@
         </div>
       </div>
       <div class="reveal" style="margin-top: 1.5rem;">
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
+        <div class="engagement-grid">
           <div class="engagement-box">
             <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); display: block; margin-bottom: 1rem;">I</span>
             <strong style="display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; color: var(--cream); margin-bottom: 0.75rem;">Advisory Mandate</strong>
@@ -1165,7 +1214,7 @@
 
   <!-- ── ESG ── -->
   <div style="background: var(--slate-mid); padding: 5rem 4vw; border-top: 1px solid var(--border);">
-    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
+    <div class="container esg-grid">
       <div class="reveal">
         <span class="eyebrow">Sustainability &amp; ESG</span>
         <h2 style="color: var(--cream); margin-bottom: 1.5rem;">Responsible ownership.<br>Embedded — not as an after-thought.</h2>
@@ -1175,7 +1224,7 @@
         <p style="margin-top: 1rem;">Stockbridge Asset Management can support clients in meeting their ESG obligations and ambitions — practically, commercially and without losing sight of investment performance.</p>
         <p style="margin-top: 1.5rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase;">A full Sustainability &amp; ESG Statement is available on request.</p>
       </div>
-      <div class="reveal" style="display: flex; flex-direction: column; gap: 1rem;">
+      <div class="esg-photos reveal">
         <img src="Building_interior_ESG.jpeg" alt="ESG — building amenity and occupier wellbeing" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;" />
         <img src="40_Leadenhall_Cinema.jpeg" alt="40 Leadenhall — screening room amenity" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;" />
       </div>
@@ -1225,21 +1274,13 @@
         <span class="eyebrow reveal">Get in Touch</span>
         <h2 class="reveal">Let's talk.</h2>
         <p class="reveal">Whether you have a specific mandate in mind, are exploring options, or simply want to understand more about what Stockbridge Asset Management offers — John is easy to reach for an initial conversation without obligation.</p>
-        <div class="contact-details reveal">
-          <div class="contact-line">
-            <span class="contact-label">Email</span>
-            <span class="contact-value"><a href="mailto:john.duxbury@stockbridgeassetmanagement.co.uk">john.duxbury@stockbridgeassetmanagement.co.uk</a></span>
-          </div>
-          <div class="contact-line">
-            <span class="contact-label">Mobile</span>
-            <span class="contact-value"><a href="tel:07889922416">07889 922416</a></span>
-          </div>
+        <a href="mailto:john.duxbury@stockbridgeassetmanagement.co.uk" class="btn-primary reveal">Email Me</a>
+        <div class="contact-details reveal" style="margin-top: 2rem;">
           <div class="contact-line">
             <span class="contact-label">LinkedIn</span>
             <span class="contact-value"><a href="https://linkedin.com/in/johnduxbury" target="_blank" rel="noopener">linkedin.com/in/johnduxbury</a></span>
           </div>
         </div>
-        <a href="mailto:john.duxbury@stockbridgeassetmanagement.co.uk" class="btn-primary reveal">Send a Message</a>
       </div>
     </div>
   </section>
