@@ -578,14 +578,17 @@
     /* ── IMAGE GALLERY strip ── */
     .gallery-strip {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      height: 260px;
-      overflow: hidden;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: start;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 4vw;
+      gap: 1rem;
     }
     .gallery-strip img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      display: block;
       filter: brightness(0.7) saturate(0.8);
       transition: filter 0.4s;
     }
@@ -854,7 +857,7 @@
       .services-grid { grid-template-columns: 1fr; }
       .track-cases-grid { grid-template-columns: 1fr; }
       .values-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-strip { grid-template-columns: repeat(2, 1fr); height: 200px; }
+      .gallery-strip { grid-template-columns: 1fr; height: auto; }
 
       #contact::before { display: none; }
       footer { flex-direction: column; text-align: center; }
@@ -880,7 +883,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#services">What We Do</a></li>
       <li><a href="#track-record">Track Record</a></li>
-      <li><a href="#how-we-work">How We Work</a></li>
+      <li><a href="#how-we-work">Our Approach</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Get in Touch</a>
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -893,7 +896,7 @@
     <a href="#about" class="mob-link">About</a>
     <a href="#services" class="mob-link">What We Do</a>
     <a href="#track-record" class="mob-link">Track Record</a>
-    <a href="#how-we-work" class="mob-link">How We Work</a>
+    <a href="#how-we-work" class="mob-link">Our Approach</a>
     <a href="#contact" class="mob-link">Contact</a>
   </div>
 
@@ -954,7 +957,7 @@
           <h2>Senior experience.<br>No institutional layers.</h2>
           <p>An independent real estate advisory firm providing strategic asset management, investment transaction execution, development management oversight and board-level counsel across UK commercial real estate.</p>
           <p>At the heart of the firm is John Duxbury MRICS — a Chartered Surveyor with over 30 years of senior experience working across all major commercial sectors on both core and value-add strategies.</p>
-          <p>Across successive Director-level roles at M&amp;G Real Estate — Head of UK Portfolio Asset Management and Head of UK Retail &amp; Leisure — John was responsible for some of the UK's largest and most complex commercial real estate portfolios, at peak spanning more than 400 assets and exceeding £8 billion AUM.</p>
+          <p>Across successive Director-level roles at M&amp;G Real Estate — previously as Head of UK Portfolio Asset Management and Head of UK Retail &amp; Leisure — John was responsible for some of the UK's largest and most complex commercial real estate portfolios, at peak spanning more than 400 assets and exceeding £8 billion AUM.</p>
           <p>Stockbridge Asset Management brings that depth of experience to every mandate. Senior, independent, performance-focused advice — delivered personally, without the layers of institutional process. Every engagement is led directly by John.</p>
         </div>
       </div>
@@ -981,7 +984,7 @@
           <span class="service-number">01</span>
           <span class="eyebrow">Core Service</span>
           <h3>Strategic Asset Management</h3>
-          <p>Active, commercially driven asset management across all major UK commercial sectors — translating investment objectives into executable business plans, seeking out value at every stage of the asset lifecycle. Experience and track record leading <a href="#complex-situations" style="color:var(--gold-light); text-decoration:underline; text-underline-offset:3px;">complex situations and dispute resolution</a>.</p>
+          <p>Active, commercially driven asset management across all major UK commercial sectors — translating investment objectives into executable business plans, seeking out value at every stage of the asset lifecycle. Experience and track record across a range of lot sizes and sectors, including local retail convenience parades, regional shopping centres, retail parks, multi-let industrial, logistics and offices.</p>
           <a href="#track-record" class="service-link">See Track Record</a>
         </div>
 
@@ -989,7 +992,7 @@
           <span class="service-number">02</span>
           <span class="eyebrow">Advisory</span>
           <h3>Real Estate Advisory</h3>
-          <p>Independent, senior real estate counsel for investors, occupiers, private capital and the public sector — from strategic advice and investment transaction execution through to <a href="#interim-executive" style="color:var(--gold-light); text-decoration:underline; text-underline-offset:3px;">interim executive leadership</a> and <a href="#business-change" style="color:var(--gold-light); text-decoration:underline; text-underline-offset:3px;">business change and transformation</a>.</p>
+          <p>Independent, senior real estate counsel for investors, occupiers, private capital and public sector — from strategic advice and investment transaction execution through to <a href="#interim-executive" style="color:var(--gold-light); text-decoration:underline; text-underline-offset:3px;">interim executive leadership</a> and <a href="#business-change" style="color:var(--gold-light); text-decoration:underline; text-underline-offset:3px;">business change and transformation</a>. Experience and track record leading <a href="#complex-situations" style="color:var(--gold-light); text-decoration:underline; text-underline-offset:3px;">complex situations and dispute resolution</a>.</p>
           <a href="#contact" class="service-link">Discuss Your Brief</a>
         </div>
 
@@ -1117,8 +1120,6 @@
 
     <!-- Gallery strip -->
     <div class="gallery-strip">
-      <img src="40_Leadenhall_Cinema.jpeg" alt="40 Leadenhall — screening room amenity" />
-      <img src="Building_development_interior_lobby.jpeg" alt="Development interior lobby" />
       <img src="Building_Development_reception.jpeg" alt="Building reception" style="object-position: center 75%;" />
       <img src="Development_building_terrace.jpeg" alt="Rooftop terrace" />
     </div>
@@ -1134,7 +1135,7 @@
           <div class="how-image-accent"></div>
         </div>
         <div class="how-text">
-          <span class="eyebrow reveal">How We Work</span>
+          <span class="eyebrow reveal">Our Approach</span>
           <h2 class="reveal">Direct engagement.<br>Expert accountability at every step.</h2>
           <p class="reveal">Every Stockbridge Asset Management engagement is led personally by John. There is no team to hand off to, no junior associates managing the relationship, no institutional process diluting the quality of advice. You engage with thirty years of senior experience — directly and throughout.</p>
           <p class="reveal" style="margin-top: 1.25rem;">Stockbridge Asset Management operates across three engagement models, calibrated to the client's specific situation and requirements.</p>
@@ -1174,8 +1175,9 @@
         <p style="margin-top: 1rem;">Stockbridge Asset Management can support clients in meeting their ESG obligations and ambitions — practically, commercially and without losing sight of investment performance.</p>
         <p style="margin-top: 1.5rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase;">A full Sustainability &amp; ESG Statement is available on request.</p>
       </div>
-      <div class="reveal">
-        <img src="Building_interior_ESG.jpeg" alt="ESG — building amenity and occupier wellbeing" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;" />
+      <div class="reveal" style="display: flex; flex-direction: column; gap: 1rem;">
+        <img src="Building_interior_ESG.jpeg" alt="ESG — building amenity and occupier wellbeing" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;" />
+        <img src="40_Leadenhall_Cinema.jpeg" alt="40 Leadenhall — screening room amenity" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;" />
       </div>
     </div>
   </div>
@@ -1193,7 +1195,7 @@
           <p>Straightforward advice, honestly delivered. Always in the client's interest.</p>
         </div>
         <div class="value-item reveal">
-          <h4>Objectivity</h4>
+          <h4>Independent Objectivity</h4>
           <p>Acting and taking decisions impartially, fairly and on merit, using the best evidence and without discrimination or bias.</p>
         </div>
         <div class="value-item reveal">
@@ -1206,10 +1208,10 @@
         </div>
         <div class="value-item reveal">
           <h4>Commercial Acumen</h4>
-          <p>Solutions that work in the real world — practical, executable and focused on outcomes.</p>
+          <p>Solutions that work — practical, executable and focused on real world outcomes.</p>
         </div>
         <div class="value-item reveal">
-          <h4>Performance</h4>
+          <h4>Performance Focussed</h4>
           <p>Activity without results is not enough. Every engagement is measured against the outcomes we deliver.</p>
         </div>
       </div>
